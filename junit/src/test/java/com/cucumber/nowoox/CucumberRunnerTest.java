@@ -7,7 +7,6 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "src/test/resources/com.cucumber.nowoox"
-
 )
 public class CucumberRunnerTest {
 }

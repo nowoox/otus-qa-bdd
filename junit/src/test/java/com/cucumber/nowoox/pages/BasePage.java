@@ -1,5 +1,8 @@
 package com.cucumber.nowoox.pages;
 
+import com.cucumber.nowoox.steps.Hooks;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -12,9 +15,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public abstract class BasePage {
     public WebDriver driver;
     public WebDriverWait webDriverWait;
+    public Logger logger = LogManager.getLogger(BasePage.class);
+
 
     public BasePage(WebDriver driver){
-        this.driver = driver;
+        this.driver = Hooks.getDriver();
         webDriverWait = new WebDriverWait(driver, 15);
         PageFactory.initElements(driver, this);
     }
@@ -36,7 +41,7 @@ public abstract class BasePage {
     public void isElementDisplayed(By elementBy){
         waitVisibility(elementBy);
         assertTrue(driver.findElement(elementBy).isDisplayed());
-        //logger.info("Элемент найден: " + elementBy);
+        logger.info("Элемент найден: " + elementBy);
     }
 
     public void waitVisibility(By elementBy){
