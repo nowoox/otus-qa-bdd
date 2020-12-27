@@ -16,8 +16,6 @@ public class PersonalPageSteps {
 
     public PersonalDataPage personalDataPage;
     public LoginPage loginPage;
-
-
     public Logger logger = LogManager.getLogger(BasePage.class);
 
     public PersonalPageSteps() {
@@ -55,11 +53,56 @@ public class PersonalPageSteps {
 
     @Then("I get message invitation is sent")
     public void iGetMessageInvitationIsSent() {
-        logger.info("233");
+        personalDataPage.checkIfInvitationSent();
     }
 
     @Then("I go to my courses page")
     public void iGoToMyCoursesPage() {
         personalDataPage.goToCourses();
+    }
+
+    @And("I open settings page")
+    public void iOpenSettingsPage() {
+        personalDataPage.goToSettings();
+    }
+
+    @And("I change notifications settings")
+    public void iChangeNotificationsSettings() {
+        personalDataPage.changeNotificationSettings();
+    }
+
+    @Then("I get popup changes are saved")
+    public void iGetPopupChangesAreSaved() {
+        personalDataPage.checkIfPopupDisplayed();
+    }
+
+    @And("I go to notifications")
+    public void iGoToNotifications() {
+        personalDataPage.goToNotifications();
+    }
+
+    @When("I check {string} and value is {string}")
+    public void iCheckAndValueIs(String account, String value) {
+        personalDataPage.checkIfAccountValid(account, value);
+    }
+
+    @When("I open my posts page")
+    public void iOpenMyPostsPage() {
+        personalDataPage.goToPosts();
+    }
+
+    @Then("I get message no posts")
+    public void iGetMessageNoPosts() {
+        personalDataPage.checkIfNoPosts();
+    }
+
+    @And("I go to notifications archive")
+    public void iGoToNotificationsArchive() {
+        personalDataPage.goToNotificationArchive();
+    }
+
+    @Then("I get message no archive notifications")
+    public void iGetMessageNoArchiveNotifications() {
+        personalDataPage.checkIfNoArchiveNotifications();
     }
 }

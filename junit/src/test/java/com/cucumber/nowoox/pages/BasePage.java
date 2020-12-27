@@ -29,13 +29,14 @@ public abstract class BasePage {
     }
 
     public void click(By elementBy){
-        waitVisibility(elementBy);
         driver.findElement(elementBy).click();
+        logger.info("Выполнен клик по элементу: " + elementBy);
     }
 
     public void type(By elementBy, String text){
         driver.findElement(elementBy).sendKeys(Keys.CONTROL + "a");
         driver.findElement(elementBy).sendKeys(text);
+        logger.info("В поле " + elementBy + " введен текст " + text);
     }
 
     public void isElementDisplayed(By elementBy){
@@ -46,13 +47,16 @@ public abstract class BasePage {
 
     public void waitVisibility(By elementBy){
         webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(elementBy));
+        logger.info("Элемент найден: " + elementBy);
     }
 
     public void waitIsClickable(By elementBy){
         webDriverWait.until(ExpectedConditions.elementToBeClickable(elementBy));
+        logger.info("Элемент найден: " + elementBy);
     }
 
     public void waitPresence(By elementBy){
         webDriverWait.until(ExpectedConditions.presenceOfElementLocated(elementBy));
+        logger.info("Элемент найден: " + elementBy);
     }
 }
