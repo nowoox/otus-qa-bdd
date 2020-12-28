@@ -38,6 +38,22 @@ public class PersonalDataPage extends BasePage {
         click(By.cssSelector(MAIN_PAGE_PROFILE_LINK));
     }
 
+    public void logout(){
+
+        waitPresence(By.cssSelector(MAIN_PAGE_PROFILE_LINK));
+
+        Actions builder = new Actions(driver);
+
+        builder.moveToElement(driver.findElement(By.cssSelector(".header2-menu__item-text__username")))
+                .build()
+                .perform();
+
+        waitVisibility(By.cssSelector(MAIN_PAGE_PROFILE_LINK));
+
+        click(By.xpath("//a[contains(@href, '/logout')]"));
+
+    }
+
     public void goToCourses() {
         waitPresence(By.cssSelector("div.nav:nth-child(6) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > a:nth-child(1)"));
         click(By.cssSelector("div.nav:nth-child(6) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > a:nth-child(1)"));
@@ -64,7 +80,6 @@ public class PersonalDataPage extends BasePage {
 
     public void goToSettings(){
         click(By.cssSelector("a[href='/lk/settings/auth/']"));
-        //click(By.cssSelector("a[href='/lk/settings/notifications/']"));
     }
 
     public void goToNotifications(){
@@ -93,6 +108,12 @@ public class PersonalDataPage extends BasePage {
         click(By.xpath("//*[text()='Блог' and @class='header2_subheader-link']"));
         waitVisibility(By.xpath("//*[text()='Моё']"));
         click(By.cssSelector("a[href='/nest/my/']"));
+    }
+
+    public void goToTestingPage(){
+        waitVisibility(By.cssSelector(".transitional-main__event-text"));
+
+        clickViaTry(By.xpath("//*[@id='categories_id']//*[@title='Тестирование']"));
     }
 
     public void sendInvitation() {
@@ -127,6 +148,60 @@ public class PersonalDataPage extends BasePage {
     public void checkIfInvitationSent(){
         Assert.assertTrue("Сообщение об отправке приглашения не отображается",
                 driver.findElement(By.cssSelector("p.input-line")).isDisplayed());
+    }
+
+    public void checkIfPwdPopupDisplayed(){
+        Assert.assertTrue("Попап об обязательности заполнения поля не отображается",
+                driver.findElement(By.cssSelector("")).isDisplayed());
+    }
+
+    public void checkIfBadPwdMessageIsDisplayed(){
+        Assert.assertTrue("Сообщение о невалидном пароле не оторажается",
+                driver.findElement(By.cssSelector(".input-line__error")).isDisplayed());
+    }
+
+    public void checkIfWrongSmsMessageIsDisplayed(){
+        waitVisibility(By.cssSelector(".input-error__text"));
+        Assert.assertTrue("Сообщение о неверном смс не отображается",
+                driver.findElement(By.cssSelector(".input-error__text")).isDisplayed());
+    }
+
+    public void checkIfNeedRegistrationMessageIsDisplayed(){
+        Assert.assertTrue("Сообщение о необходимости регистрации не отображается",
+                driver.findElement(By.cssSelector(".assessment-form-fields_header")).isDisplayed());
+    }
+
+    public void checkIfLoginButtonIsDisplayed(){
+        Assert.assertTrue("Кнопка входа отображается",
+                driver.findElement(By.cssSelector(".header2__auth")).isDisplayed());
+    }
+
+    public void typeNewPwds(){
+        type(By.cssSelector("#id_password"), "1");
+        type(By.cssSelector("#id_password_check"), "1");
+    }
+
+    public void inputPhoneValidationSms(){
+        click(By.cssSelector(".js-change-phone"));
+        waitVisibility(By.cssSelector("p.text:nth-child(2)"));
+        click(By.cssSelector(".js-send"));
+        waitVisibility(By.cssSelector("input.js-code"));
+        type(By.cssSelector("input.js-code"), "1111");
+        click(By.cssSelector(".js-send"));
+    }
+
+    public void submitQaLeadCourse(){
+        waitPresence(By.cssSelector("a.js-stats:nth-child(4) > div:nth-child(1) > div:nth-child(1) > picture:nth-child(1) > img:nth-child(2)"));
+
+        //waitPresence(By.cssSelector("a.nav__item:nth-child(6)"));
+        click(By.cssSelector("body > div.sticky-banner.js-sticky-banner > div > div.sticky-banner__right > div"));
+
+        moveAndClick(By.cssSelector("a.js-stats:nth-child(4) > div:nth-child(1) > div:nth-child(1) > picture:nth-child(1) > img:nth-child(2)"));
+
+        //click(By.cssSelector("a.js-stats:nth-child(4) > div:nth-child(1) > div:nth-child(1) > picture:nth-child(1) > img:nth-child(2)"));
+        waitPresence(By.cssSelector(".course-header2__new > form:nth-child(1) > div:nth-child(1) > button:nth-child(1) > span:nth-child(1)"));
+        click(By.cssSelector(".course-header2__new > form:nth-child(1) > div:nth-child(1) > button:nth-child(1) > span:nth-child(1)"));
+
     }
 
 }

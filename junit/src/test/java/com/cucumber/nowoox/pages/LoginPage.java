@@ -1,6 +1,5 @@
 package com.cucumber.nowoox.pages;
 
-import com.cucumber.nowoox.steps.Hooks;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 

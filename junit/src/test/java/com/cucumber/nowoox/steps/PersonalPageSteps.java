@@ -1,14 +1,12 @@
 package com.cucumber.nowoox.steps;
 
-import com.cucumber.nowoox.pages.BasePage;
 import com.cucumber.nowoox.pages.LoginPage;
 import com.cucumber.nowoox.pages.PersonalDataPage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
@@ -16,7 +14,6 @@ public class PersonalPageSteps {
 
     public PersonalDataPage personalDataPage;
     public LoginPage loginPage;
-    public Logger logger = LogManager.getLogger(BasePage.class);
 
     public PersonalPageSteps() {
         WebDriver driver = Hooks.getDriver();
@@ -104,5 +101,61 @@ public class PersonalPageSteps {
     @Then("I get message no archive notifications")
     public void iGetMessageNoArchiveNotifications() {
         personalDataPage.checkIfNoArchiveNotifications();
+    }
+
+    @And("I click save password button")
+    public void iClickSavePasswordButton() {
+        personalDataPage.click(By.cssSelector("button.button:nth-child(5)"));
+    }
+
+    @Then("I get popup please fill this field")
+    public void iGetPopupPleaseFillThisField() {
+        personalDataPage.checkIfPwdPopupDisplayed();
+    }
+
+    @And("I type new short pwds")
+    public void iTypeNewShortPwds() {
+        personalDataPage.typeNewPwds();
+    }
+
+    @Then("I get message pwd is bad")
+    public void iGetMessagePwdIsBad() {
+        personalDataPage.checkIfBadPwdMessageIsDisplayed();
+    }
+
+
+    @And("I input wrong phone number validation sms")
+    public void iInputWrongPhoneNumberValidationSms() {
+        personalDataPage.inputPhoneValidationSms();
+    }
+
+    @Then("I get message code is wrong")
+    public void iGetMessageCodeIsWrong() {
+        personalDataPage.checkIfWrongSmsMessageIsDisplayed();
+    }
+
+    @When("I select testing page")
+    public void iSelectTestingPage() {
+        personalDataPage.goToTestingPage();
+    }
+
+    @And("I go to submit qa lead course")
+    public void iGoToSubmitQaLeadCourse() {
+        personalDataPage.submitQaLeadCourse();
+    }
+
+    @Then("I get message I have to register")
+    public void iGetMessageIHaveToRegister() {
+        personalDataPage.checkIfNeedRegistrationMessageIsDisplayed();
+    }
+
+    @When("I logout site")
+    public void iLogoutSite() {
+        personalDataPage.logout();
+    }
+
+    @Then("I can see login button")
+    public void iCanSeeLoginButton() {
+        personalDataPage.checkIfLoginButtonIsDisplayed();
     }
 }

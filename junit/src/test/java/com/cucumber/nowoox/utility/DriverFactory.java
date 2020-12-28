@@ -6,6 +6,9 @@ import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class DriverFactory {
 
     public enum Browser {
@@ -27,8 +30,11 @@ public class DriverFactory {
                 ChromeOptions options = new ChromeOptions();
                 //options.addArguments("--headless", "--silent");
                 options.addArguments("--start-maximized");
-                //System.setProperty("webdriver.chrome.silentOutput", "true");
-                //System.setProperty(ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, "true");
+                System.setProperty("webdriver.chrome.silentOutput", "true");
+
+                System.setProperty(ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, "true");
+                Logger.getLogger("org.openqa.selenium").setLevel(Level.OFF);
+
                 driver.set(new ChromeDriver(options));
                 break;
 

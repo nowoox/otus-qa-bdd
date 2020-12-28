@@ -50,6 +50,31 @@ Feature: I can operate with personal data
     And I go to notifications archive
     Then I get message no archive notifications
 
+  @Sometag
+  Scenario: I can check pwd validation
+    Given I login on site
+    When I open personal data page
+    And I open settings page
+    And I type new short pwds
+    And I click save password button
+    Then I get message pwd is bad
 
+  @Sometag
+  Scenario: I can check sms code validation
+    Given I login on site
+    When I open personal data page
+    And I input wrong phone number validation sms
+    Then I get message code is wrong
 
-    
+  @Sometag
+  Scenario: I cannot submit application
+    Given I login on site
+    When I select testing page
+    And I go to submit qa lead course
+    Then I get message I have to register
+
+  @Sometag
+  Scenario: I can logout
+    Given I login on site
+    When I logout site
+    Then I can see login button

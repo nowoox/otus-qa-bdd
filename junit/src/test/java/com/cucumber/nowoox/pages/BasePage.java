@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -26,6 +27,28 @@ public abstract class BasePage {
 
     public void open(String url){
         driver.get(url);
+    }
+
+    public void clickViaTry(By elementBy){
+        waitIsClickable(elementBy);
+
+        try {
+            click(elementBy);
+        }
+        catch(org.openqa.selenium.StaleElementReferenceException ex)
+        {
+            click(elementBy);;
+        }
+    }
+
+    public void moveAndClick(By elementBy){
+
+        Actions builder = new Actions(driver);
+
+        builder.moveToElement(driver.findElement(elementBy))
+                .click()
+                .build()
+                .perform();
     }
 
     public void click(By elementBy){
