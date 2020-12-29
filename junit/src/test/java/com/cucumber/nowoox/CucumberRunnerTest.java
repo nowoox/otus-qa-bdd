@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/com.cucumber.nowoox"
         //, tags = "@Parametrized"
         //, tags = "@Smoke"
-        , tags = "@Sometag"
+        //, tags = "@Sometag"
 )
 public class CucumberRunnerTest {
 }
