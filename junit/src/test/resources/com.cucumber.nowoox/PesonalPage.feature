@@ -24,7 +24,7 @@ Feature: I can operate with personal data
     And I change notifications settings
     Then I get popup changes are saved
 
-  @Sometag@Parametrized
+  @Parametrized@Sometag
   Scenario Outline: I check my accounts
     Given I login on site
     When I open personal data page

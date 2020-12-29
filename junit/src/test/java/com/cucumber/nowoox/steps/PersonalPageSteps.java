@@ -30,7 +30,6 @@ public class PersonalPageSteps {
     @Then("Courses are empty")
     public void coursesAreEmpty() {
         personalDataPage.checkIfCoursesEmpty();
-        System.out.println("HELP");
     }
 
     @Given("I login on site")

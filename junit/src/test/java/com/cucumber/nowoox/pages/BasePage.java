@@ -1,6 +1,8 @@
 package com.cucumber.nowoox.pages;
 
 import com.cucumber.nowoox.steps.Hooks;
+import config.ServerConfig;
+import org.aeonbits.owner.ConfigFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -17,6 +19,7 @@ public abstract class BasePage {
     public WebDriver driver;
     public WebDriverWait webDriverWait;
     public Logger logger = LogManager.getLogger(BasePage.class);
+    public ServerConfig cfg = ConfigFactory.create(ServerConfig.class);
 
 
     public BasePage(WebDriver driver){
@@ -49,6 +52,8 @@ public abstract class BasePage {
                 .click()
                 .build()
                 .perform();
+
+        logger.info("Выполнен клик по элементу: " + elementBy);
     }
 
     public void click(By elementBy){

@@ -17,7 +17,7 @@ public class LoginPage extends BasePage{
 
         public void login(){
 
-        open("https://otus.ru");
+        open(cfg.url_otus());
 
         waitVisibility(By.cssSelector(LOGIN_PAGE_SELECTOR));
 
@@ -27,9 +27,9 @@ public class LoginPage extends BasePage{
 
         waitVisibility(By.xpath(LOGIN_PAGE_LOGIN_SELECTOR));
 
-        type(By.xpath(LOGIN_PAGE_LOGIN_SELECTOR), "vomagij874@natxt.com");
+        type(By.xpath(LOGIN_PAGE_LOGIN_SELECTOR), cfg.login());
 
-        type(By.cssSelector(LOGIN_PAGE_PASSWORD_SELECTOR), "Testpassword");
+        type(By.cssSelector(LOGIN_PAGE_PASSWORD_SELECTOR), cfg.password());
 
         click(By.cssSelector(LOGIN_PAGE_LOGIN_BUTTON_SELECTOR));
     }
