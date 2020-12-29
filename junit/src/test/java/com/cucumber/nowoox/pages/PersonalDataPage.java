@@ -1,11 +1,13 @@
 package com.cucumber.nowoox.pages;
 
+import io.qameta.allure.Allure;
+import io.qameta.allure.Step;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+
+import java.io.ByteArrayInputStream;
 
 public class PersonalDataPage extends BasePage {
 
@@ -24,6 +26,7 @@ public class PersonalDataPage extends BasePage {
         return (mail);
     }
 
+    @Step
     public void goToPersonalDataPage() {
         waitPresence(By.cssSelector(MAIN_PAGE_PROFILE_LINK));
 
@@ -38,6 +41,7 @@ public class PersonalDataPage extends BasePage {
         click(By.cssSelector(MAIN_PAGE_PROFILE_LINK));
     }
 
+    @Step
     public void logout() {
 
         waitPresence(By.cssSelector(MAIN_PAGE_PROFILE_LINK));
@@ -54,11 +58,14 @@ public class PersonalDataPage extends BasePage {
 
     }
 
+    @Step
     public void goToCourses() {
         waitPresence(By.cssSelector("div.nav:nth-child(6) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > a:nth-child(1)"));
         click(By.cssSelector("div.nav:nth-child(6) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > a:nth-child(1)"));
+        Allure.addAttachment("Screenshot", new ByteArrayInputStream(((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES)));
     }
 
+    @Step
     public void checkIfCoursesEmpty() {
 
         waitVisibility(By.cssSelector(".text"));
@@ -67,6 +74,7 @@ public class PersonalDataPage extends BasePage {
         logger.info("Сообщение об отсутствии курсов отображается");
     }
 
+    @Step
     public void checkIfPopupDisplayed() {
         waitVisibility(By.xpath("//div[@class='notification-lib notification-lib_success undefined']"));
         Assert.assertTrue("Попап не отображается",
@@ -74,18 +82,22 @@ public class PersonalDataPage extends BasePage {
         logger.info("Попап отображается");
     }
 
+    @Step
     public void goToTakeFriend() {
         click(By.cssSelector("a[href='/lk/invite/']"));
     }
 
+    @Step
     public void goToSettings() {
         click(By.cssSelector("a[href='/lk/settings/auth/']"));
     }
 
+    @Step
     public void goToNotifications() {
         click(By.xpath("(//a[@href='/lk/settings/notifications/'])[last()]"));
     }
 
+    @Step
     public void goToNotificationArchive() {
         waitPresence(By.cssSelector(".header2_subheader-img"));
 
@@ -103,6 +115,7 @@ public class PersonalDataPage extends BasePage {
 
     }
 
+    @Step
     public void goToPosts() {
         waitPresence(By.xpath("//*[text()='Блог' and @class='header2_subheader-link']"));
         click(By.xpath("//*[text()='Блог' and @class='header2_subheader-link']"));
@@ -110,12 +123,14 @@ public class PersonalDataPage extends BasePage {
         click(By.cssSelector("a[href='/nest/my/']"));
     }
 
+    @Step
     public void goToTestingPage() {
         waitVisibility(By.cssSelector(".transitional-main__event-text"));
 
         clickViaTry(By.xpath("//*[@id='categories_id']//*[@title='Тестирование']"));
     }
 
+    @Step
     public void sendInvitation() {
         waitPresence(By.cssSelector(EMAIL_FIELD));
         type(By.cssSelector(EMAIL_FIELD), randomMail());
@@ -126,17 +141,21 @@ public class PersonalDataPage extends BasePage {
         logger.info("Сообщение об отправке приглашения отображается");
     }
 
+    @Step
     public void changeNotificationSettings() {
         click(By.xpath("//span[contains(text(), 'Основные')]"));
     }
 
+    @Step
     public void checkIfAccountValid(String account, String value) {
         driver.findElement(By.xpath("//div[contains(text(), '" + account + "')]"));
         Assert.assertEquals("Настройка аккаунта + " + account + " неверная",
                 driver.findElement(By.xpath("//div[contains(text(), '" + account + "')]/following::div[1]")).getText(), value);
         logger.info("Настройка аккаунта " + account + " верная");
+        Allure.addAttachment("Screenshot", new ByteArrayInputStream(((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES)));
     }
 
+    @Step
     public void checkIfNoPosts() {
         waitVisibility(By.cssSelector(NO_POSTS_MESSAGE));
         Assert.assertTrue("Сообщение об отсутствии постов не отображается",
@@ -144,30 +163,35 @@ public class PersonalDataPage extends BasePage {
         logger.info("Сообщение об отсутствии постов отображается");
     }
 
+    @Step
     public void checkIfNoArchiveNotifications() {
         Assert.assertTrue("Сообщение об отсутствии архивных уведомлений не отображается",
                 driver.findElement(By.cssSelector(".notifications-list__item_empty > div:nth-child(1)")).isDisplayed());
         logger.info("Сообщение об отсутствии архивных уведомлений отображается");
     }
 
+    @Step
     public void checkIfInvitationSent() {
         Assert.assertTrue("Сообщение об отправке приглашения не отображается",
                 driver.findElement(By.cssSelector("p.input-line")).isDisplayed());
         logger.info("Сообщение об отправке приглашения отображается");
     }
 
+    @Step
     public void checkIfPwdPopupDisplayed() {
         Assert.assertTrue("Попап об обязательности заполнения поля не отображается",
                 driver.findElement(By.cssSelector("")).isDisplayed());
         logger.info("Попап об обязательности заполнения поля отображается");
     }
 
+    @Step
     public void checkIfBadPwdMessageIsDisplayed() {
         Assert.assertTrue("Сообщение о невалидном пароле не отображается",
                 driver.findElement(By.cssSelector(".input-line__error")).isDisplayed());
         logger.info("Сообщение о невалидном пароле отображается");
     }
 
+    @Step
     public void checkIfWrongSmsMessageIsDisplayed() {
         waitVisibility(By.cssSelector(".input-error__text"));
         Assert.assertTrue("Сообщение о неверном смс не отображается",
@@ -175,23 +199,27 @@ public class PersonalDataPage extends BasePage {
         logger.info("Сообщение о неверном смс отображается");
     }
 
+    @Step
     public void checkIfNeedRegistrationMessageIsDisplayed() {
         Assert.assertTrue("Сообщение о необходимости регистрации не отображается",
                 driver.findElement(By.cssSelector(".assessment-form-fields_header")).isDisplayed());
         logger.info("Сообщение о необходимости регистрации отображается");
     }
 
+    @Step
     public void checkIfLoginButtonIsDisplayed() {
         Assert.assertTrue("Кнопка входа не отображается",
                 driver.findElement(By.cssSelector(".header2__auth")).isDisplayed());
         logger.info("Кнопка входа отображается");
     }
 
+    @Step
     public void typeNewPwds() {
         type(By.cssSelector("#id_password"), "1");
         type(By.cssSelector("#id_password_check"), "1");
     }
 
+    @Step
     public void inputPhoneValidationSms() {
         click(By.cssSelector(".js-change-phone"));
         waitVisibility(By.cssSelector("p.text:nth-child(2)"));
@@ -201,6 +229,7 @@ public class PersonalDataPage extends BasePage {
         click(By.cssSelector(".js-send"));
     }
 
+    @Step
     public void submitQaLeadCourse() {
         waitPresence(By.cssSelector("a.js-stats:nth-child(4) > div:nth-child(1) > div:nth-child(1) > picture:nth-child(1) > img:nth-child(2)"));
 

@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "src/test/resources/com.cucumber.nowoox"
-        //, tags = "@Parametrized"
+        , tags = "@Parametrized"
         //, tags = "@Smoke"
         //, tags = "@Sometag"
 )
